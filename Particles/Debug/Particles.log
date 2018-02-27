@@ -1,40 +1,7 @@
 ﻿  Performing Custom Build Tools
-C:\Users\b4014242\Desktop\Repos\Particles\DrawHeightMap.hlsl(93,23): warning X3206: 'mul': implicit truncation of vector type
-C:\Users\b4014242\Desktop\Repos\Particles\DrawHeightMap.hlsl(93,9): warning X3206: implicit truncation of vector type
-C:\Users\b4014242\Desktop\Repos\Particles\DrawHeightMap.hlsl(95,33): warning X3206: 'GetLightingColour': implicit truncation of vector type
-  
   Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
   Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
   
-  compilation succeeded; see C:\Users\b4014242\Desktop\Repos\Particles\DrawHeightMap.o
-  Performing Custom Build Tools
-  Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
-  Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
-  
-  compilation succeeded; see C:\Users\b4014242\Desktop\Repos\Particles\DrawShadowCaster.o
-  Performing Custom Build Tools
-  Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
-  Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
-  
-  compilation succeeded; see C:\Users\b4014242\Desktop\Repos\Particles\ParticleFire.o
-  Performing Custom Build Tools
-  Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
-  Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
-  
-  compilation succeeded; see C:\Users\b4014242\Desktop\Repos\Particles\ParticleRain.o
-  Aeroplane.cpp
-c:\users\b4014242\desktop\repos\particles\aeroplane.cpp(111): warning C4100: 'bPlayerControl': unreferenced formal parameter
-  Application.cpp
-  Effects.cpp
-  HeightMap.cpp
-c:\users\b4014242\desktop\repos\particles\heightmap.cpp(142): warning C4389: '!=': signed/unsigned mismatch
-  ParticleSystem.cpp
-  Generating Code...
-Effects11d.lib(d3dxGlobal.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(d3dxGlobal.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-Effects11d.lib(EffectAPI.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(EffectAPI.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-Effects11d.lib(EffectLoad.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(EffectLoad.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-Effects11d.lib(EffectNonRuntime.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(EffectNonRuntime.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-Effects11d.lib(EffectReflection.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(EffectReflection.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-Effects11d.lib(EffectRuntime.obj) : warning LNK4099: PDB 'Effects11d.pdb' was not found with 'Effects11d.lib(EffectRuntime.obj)' or at 'C:\Users\b4014242\Desktop\Repos\Debug\Effects11d.pdb'; linking object as if no debug info
-  Particles.vcxproj -> C:\Users\b4014242\Desktop\Repos\Debug\Particles.exe
-  Particles.vcxproj -> C:\Users\b4014242\Desktop\Repos\Debug\Particles.pdb (Full PDB)
+  compilation succeeded; see C:\Users\b4014242\Desktop\fdhgdg\Particles\ParticleFire.o
+  Particles.vcxproj -> C:\Users\b4014242\Desktop\fdhgdg\Debug\Particles.exe
+  Particles.vcxproj -> C:\Users\b4014242\Desktop\fdhgdg\Debug\Particles.pdb (Partial PDB)

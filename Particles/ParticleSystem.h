@@ -7,7 +7,7 @@
 
 #include "Effects.h"
 
-#define PARTICLE_ELEMENT_DESC_SIZE	5
+#define PARTICLE_ELEMENT_DESC_SIZE	6
 
 class ParticleSystem
 {
@@ -17,6 +17,7 @@ class ParticleSystem
 		XMFLOAT3 InitialVel;
 		XMFLOAT2 Size;
 		float Age;
+		float RoatationSpeed;
 		unsigned int Type;
 	};
 
