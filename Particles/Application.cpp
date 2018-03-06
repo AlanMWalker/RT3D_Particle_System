@@ -261,7 +261,7 @@ void Application::HandleUpdate()
 
 		if( this->IsKeyPressed(VK_NEXT ) )
 			m_shadowCastingLightPosition.y+=.2f;
-	}
+	}	
 
 	static bool dbW = false;
 	if (this->IsKeyPressed('W') )	
@@ -370,7 +370,7 @@ void Application::Render3D()
 
 	m_pRain->SetEyePos(vCamera);
 	m_pRain->SetEmitPos(vCamera);
-	//m_pRain->Draw(m_pD3DDeviceContext, matVP);
+	m_pRain->Draw(m_pD3DDeviceContext, matVP);
 
 	// restore default states.
 

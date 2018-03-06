@@ -1,9 +1,9 @@
 ﻿  App.cpp
   CommonApp.cpp
   CommonFont.cpp
-c:\users\b4014242\desktop\fdhgdg\shared\commonfont.cpp(109): warning C4456: declaration of 'ch' hides previous local declaration
-  c:\users\b4014242\desktop\fdhgdg\shared\commonfont.cpp(100): note: see declaration of 'ch'
+c:\users\b4014242\desktop\repos\rt3d_particle_system\shared\commonfont.cpp(109): warning C4456: declaration of 'ch' hides previous local declaration
+  c:\users\b4014242\desktop\repos\rt3d_particle_system\shared\commonfont.cpp(100): note: see declaration of 'ch'
   CommonMesh.cpp
   D3DHelpers.cpp
   Generating Code...
-  Shared.vcxproj -> C:\Users\b4014242\Desktop\fdhgdg\Debug\Shared.lib
+  Shared.vcxproj -> C:\Users\b4014242\Desktop\Repos\RT3D_Particle_System\Debug\Shared.lib

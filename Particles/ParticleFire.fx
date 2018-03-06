@@ -96,7 +96,10 @@ float3 RandUnitVec3(float offset)
 //***********************************************
 
 #define PT_EMITTER 0
-#define PT_FLARE 1
+//#define PT_FLARE 1
+#define PT_SMOKE 2
+
+//#define DEBUG_SHADER
 
 struct Particle
 {
@@ -127,7 +130,12 @@ void StreamOutGS(point Particle gin[1],
 	if (gin[0].Type == PT_EMITTER)
 	{
 		// time to emit a new particle?
+#ifndef DEBUG_SHADER
 		if (gin[0].Age > 0.005f)
+#else
+		if (gin[0].Age > 1.0f)
+
+#endif
 		{
 			float3 vRandom = RandUnitVec3(0.0f);
 			float3 vRandom2 = RandUnitVec3(0.01f);
@@ -135,12 +143,16 @@ void StreamOutGS(point Particle gin[1],
 			vRandom.z *= 0.5f;
 
 			Particle p;
-			p.InitialPosW = gEmitPosW.xyz;
+			p.InitialPosW = gEmitPosW.xyz + (vRandom * 1.0);
 			p.InitialVelW = vRandom2;
 			p.SizeW = float2(3.0f, 3.0f);
 			p.Age = 0.0f;
+#ifdef PT_FLARE
 			p.Type = PT_FLARE;
-			p.RotationSpeed = (0.01f);
+#else
+			p.Type = PT_SMOKE;
+#endif
+			p.RotationSpeed = radians(720) *vRandom.x;
 
 			ptStream.Append(p);
 
@@ -236,30 +248,32 @@ void DrawGS(point VertexOut gin[1],
 		//
 		// Compute triangle strip vertices (quad) in world space.
 		//
-		float halfWidth = 0.5f*gin[0].SizeW.x;
-		float halfHeight = 0.5f*gin[0].SizeW.y;
+		const float halfWidth = 0.5f*gin[0].SizeW.x;
+		const float halfHeight = 0.5f*gin[0].SizeW.y;
+		
+		const float sinVerts[4] =
+		{
+			sin(radians(135.0f) + gin[0].RotAng),
+			sin(radians(45.0f) + gin[0].RotAng),
+			sin(radians(225.0f) + gin[0].RotAng),
+			sin(radians(315.0f) + gin[0].RotAng)
+		};
 
-		const float sinAngle = sin(gin[0].RotAng);
-		const float cosAngle = cos(gin[0].RotAng);
+		const float cosVerts[4] =
+		{
+			cos(radians(135.0f) + gin[0].RotAng),
+			cos(radians(45.0f) + gin[0].RotAng),
+			cos(radians(225.0f) + gin[0].RotAng),
+			cos(radians(315.0f) + gin[0].RotAng)
+		};
 
-		float sinVerts[4];
-		float cosVerts[4];
-
-		sinVerts[0] = radians(135.0f) + sinAngle;
-		sinVerts[1] = radians(45.0f) + sinAngle;
-		sinVerts[2] = radians(225.0f) + sinAngle;
-		sinVerts[3] = radians(315.0f) + sinAngle;
-
-		cosVerts[0] = radians(135.0f) + cosAngle;
-		cosVerts[1] = radians(45.0f) + cosAngle;
-		cosVerts[2] = radians(225.0f) + cosAngle;
-		cosVerts[3] = radians(315.0f) + cosAngle;
-
-		float4 v[4];
-		v[0] = float4(gin[0].PosW + sinVerts[0] * (halfWidth*right) - cosVerts[0] * (halfHeight*up), 1.0f);
-		v[1] = float4(gin[0].PosW + sinVerts[1] * (halfWidth*right) + cosVerts[1] * (halfHeight*up), 1.0f);
-		v[2] = float4(gin[0].PosW - sinVerts[2] * (halfWidth*right) - cosVerts[2] * (halfHeight*up), 1.0f);
-		v[3] = float4(gin[0].PosW - sinVerts[3] * (halfWidth*right) + cosVerts[3] * (halfHeight*up), 1.0f);
+		const float4 v[4] =
+		{
+			float4(gin[0].PosW + sinVerts[0] * (halfWidth*right) + cosVerts[0] * (halfHeight * up), 1.0f),
+			float4(gin[0].PosW + sinVerts[1] * (halfWidth*right) + cosVerts[1] * (halfHeight * up), 1.0f),
+			float4(gin[0].PosW + sinVerts[2] * (halfWidth*right) + cosVerts[2] * (halfHeight * up), 1.0f),
+			float4(gin[0].PosW + sinVerts[3] * (halfWidth*right) + cosVerts[3] * (halfHeight * up), 1.0f)
+		};
 
 		//
 		// Transform quad vertices to world space and output 
@@ -271,7 +285,16 @@ void DrawGS(point VertexOut gin[1],
 		{
 			gout.PosH = mul(v[i], gViewProj);
 			gout.Tex = gQuadTexC[i];
+#ifdef PT_SMOKE
+			float4 col = gin[0].Color;
+			col.w = 0.01;
+			//float percent = degrees(gin[0].RotAng) / 360.0;
+			//col.x = percent * 256;
+			gout.Color = col;
+
+#else
 			gout.Color = gin[0].Color;
+#endif 
 			triStream.Append(gout);
 
 		}
@@ -280,7 +303,15 @@ void DrawGS(point VertexOut gin[1],
 
 float4 DrawPS(GeoOut pin) : SV_TARGET
 {
+#ifdef DEBUG_SHADER
+	return float4(1.0, 0.0, 0.0, 1.0);
+#endif
+
+#ifdef PT_FLARE
 	return gTexArray.Sample(samLinear, float3(pin.Tex, 0))*pin.Color;
+#else
+	return gTexArray.Sample(samLinear, float3(pin.Tex, 1))*pin.Color;
+#endif
 }
 
 technique11 DrawTech
